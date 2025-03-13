@@ -1,0 +1,7 @@
+[user]
+    name = carlos
+    email = carlos@admin.com
+[core]
+    repositoryformatversion = 0
+    filemode = true
+    bare = false

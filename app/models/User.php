@@ -24,5 +24,13 @@ class User extends Database {
         return $stmt->execute();
     }
     
+    public function updateAvatar($user_id, $avatar_path) {
+        $avatar_path = "public/uploads/" . basename($avatar_path); // Đảm bảo đường dẫn đúng
+        $sql = "UPDATE users SET avatar = ? WHERE id = ?";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("si", $avatar_path, $user_id);
+        return $stmt->execute();
+    }
+    
     
 }

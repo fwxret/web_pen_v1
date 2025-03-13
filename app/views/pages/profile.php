@@ -1,89 +1,75 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="author" content="Untree.co">
-  <link rel="shortcut icon" href="favicon.png">
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <meta name="author" content="Untree.co">
+   <link rel="shortcut icon" href="favicon.png">
+   <meta name="description" content="" />
+   <meta name="keywords" content="bootstrap, bootstrap4" />
+   <!-- Bootstrap CSS -->
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+   <link href="<?= URLROOT ?>/public/css/bootstrap.min.css" rel="stylesheet">
+   <link href="<?= URLROOT ?>/public/css/tiny-slider.css" rel="stylesheet">
+   <link href="<?= URLROOT ?>/public/css/style.css" rel="stylesheet">
+   <title>Shop</title>
+</head>
 
-  <meta name="description" content="" />
-  <meta name="keywords" content="bootstrap, bootstrap4" />
+<body>
+   <div class="container mt-5">
+      <h2 class="text-center">Profile</h2>
+      <p class="text-center">Hello, <?= htmlspecialchars($_SESSION['username']) ?></p>
+      <div class="row justify-content-center align-items-center">
+         <!-- Avatar -->
+         <div class="col-md-4 text-center">
+            <?php
+            $userModel = $this->model("User"); // Gọi model
+            $user = $userModel->getUserById($_SESSION['user_id']); // Lấy user từ DB
+            // Gán biến đúng thứ tự
+            $avatarPath = !empty($user['avatar']) ? URLROOT . "/" . $user['avatar'] : URLROOT . "/public/images/default.png";
+            ?>
 
-		<!-- Bootstrap CSS -->
-		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-		<link href="<?= URLROOT ?>/public/css/bootstrap.min.css" rel="stylesheet">
-		<link href="<?= URLROOT ?>/public/css/tiny-slider.css" rel="stylesheet">
-		<link href="<?= URLROOT ?>/public/css/style.css" rel="stylesheet">
-		<title>Shop</title>
-	</head>
+            <!-- Không dùng htmlspecialchars() -> XSS nếu avatar bị chỉnh sửa thành payload JS -->
+            <img src="<?= $avatarPath ?>" alt="Avatar" class="rounded img-thumbnail"
+               style="width: 200px; height: 200px; object-fit: cover;">
 
-	<body>
+            <!-- Form upload avatar -->
+            <form action="<?= URLROOT ?>/profile/uploadAvatar" method="POST" enctype="multipart/form-data" class="mt-3">
+               <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?? '' ?>">
 
-		<!-- Start Header/Navigation -->
-		
-		<!-- End Header/Navigation -->
+               <div class="form-group">
+                  <label for="avatar" class="form-label">Upload Avatar</label>
+                  <input type="file" name="avatar" id="avatar" class="form-control-file">
+               </div>
 
-		<!-- Start Hero Section -->
-		<!-- End Hero Section -->
-        <div class="container mt-5">
-    <h2 class="text-center">Profile</h2>
-    <p class="text-center">Hello, <?= htmlspecialchars($_SESSION['username']) ?></p>
+               <button type="submit" class="btn btn-primary mt-2">Upload Photo</button>
+            </form>
+         </div>
 
-    <!-- Nút Update Email -->
-    <form method="POST" action="<?= URLROOT ?>/profile/updateEmail" class="mx-auto" style="max-width: 400px;">
-        <div class="mb-3">
-            <label for="email" class="form-label">New Email</label>
-            <input type="email" name="email" id="email" class="form-control" required>
-        </div>
-        <button type="submit" class="btn btn-primary w-100">Update Email</button>
-    </form>
 
-    <!-- Nút Logout -->
-    <form method="POST" action="<?= URLROOT ?>/logout" class="mx-auto" style="max-width: 400px; margin-top: 20px;">
-        <button type="submit" class="btn btn-danger w-100">Logout</button>
-    </form>
+         <!-- Update Email & Logout -->
+         <div class="col-md-6">
+            <form method="POST" action="<?= URLROOT ?>/profile/updateEmail" class="mb-3">
+               <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?? '' ?>">
+               <div class="mb-2">
+                  <label for="email" class="form-label fw-bold">New Email</label>
+                  <input type="email" name="email" id="email" class="form-control w-75" required>
+               </div>
+               <button type="submit" class="btn btn-success">Update Email</button>
+            </form>
 
-    <!-- Hiển thị danh sách user nếu là admin -->
-    <?php if (!empty($users)): ?> 
-    <h3 class="mt-5">All Users</h3>
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped text-center">
-            <thead class="table-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($users as $user): ?>
-                    <tr>
-                        <td><?= htmlspecialchars($user['id']) ?></td>
-                        <td><?= htmlspecialchars($user['username']) ?></td>
-                        <td><?= htmlspecialchars($user['email']) ?></td>
-                        <td>
-                            <form method="POST" action="<?= URLROOT ?>/profile/deleteUser" onsubmit="return confirm('Are you sure?');">
-                                <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
-                                <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
-<?php else: ?>
-    <div class="mt-5"></div> <!-- Thêm khoảng cách khi không có danh sách user -->
-<?php endif; ?>
+            <form method="POST" action="<?= URLROOT ?>/logout">
+               <button type="submit" class="btn btn-danger">Logout</button>
+            </form>
+         </div>
+      </div>
+   </div>
 
-</div>
 
- 
-             
-		<script src="js/bootstrap.bundle.min.js"></script>
-		<script src="js/tiny-slider.js"></script>
-		<script src="js/custom.js"></script>
-	</body>
+   <script src="<?= URLROOT ?>/public/js/bootstrap.bundle.min.js"></script>
+   <script src="<?= URLROOT ?>/public/js/tiny-slider.js"></script>
+   <script src="<?= URLROOT ?>/public/js/custom.js"></script>
+</body>
 
 </html>
