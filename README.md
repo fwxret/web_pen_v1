@@ -28,23 +28,28 @@ Website được xây dựng theo mô hình **MVC (Model-View-Controller)** và 
 - ✅ Hỗ trợ upload file  
 - ✅ Triển khai trên máy chủ  
 
-### Hình ảnh minh họa  
-#### Trang đăng nhập  
-![Login](screenshots/login.png)  
-#### Trang đăng ký  
-![Register](screenshots/register.png)  
-#### Trang giỏ hàng  
-![Cart](screenshots/cart.png)  
-#### Trang thanh toán  
-![Checkout](screenshots/checkout.png)  
-#### Trang blog  
-![Blog](screenshots/blog.png)  
-#### Chi tiết bài viết và bình luận  
-![Comment](screenshots/comment.png)  
-#### Trang hồ sơ cá nhân  
-![Profile](screenshots/profile.png)  
-#### Cửa hàng sản phẩm  
-![Shop](screenshots/shop.png)  
+## 2. Giao diện Website
+
+### 🔹 Giao diện chính
+
+| Đăng nhập | Đăng ký | Trang chủ |
+|---|---|---|
+| ![Login](screenshots/login.png) | ![Register](screenshots/register.png) | ![Shop](screenshots/shop.png) |
+
+| Giỏ hàng | Thanh toán | Hồ sơ người dùng |
+|---|---|---|
+| ![Cart](screenshots/cart.png) | ![Checkout](screenshots/checkout.png) | ![Profile](screenshots/profile.png) |
+
+---
+
+<details>
+  <summary>📸 Xem thêm ảnh giao diện phụ</summary>
+
+  | Bình luận Blog | Quản lý Blog |
+  |---|---|
+  | ![Comment](screenshots/comment.png) | ![Blog](screenshots/blog.png) |
+
+</details>
 
 ---
 
