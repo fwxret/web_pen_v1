@@ -67,4 +67,32 @@ Website được xây dựng theo mô hình **MVC (Model-View-Controller)** và 
 ---
 
 ## 4. Khai thác lỗ hổng  
-_(Đang cập nhật...)_
+<details>
+<summary>A03:2021 - Injection (SQLi)</summary>
+
+### Tầm quan trọng của phát hiện chính
+- Cho phép bypass xác thực, truy cập tài khoản admin không cần mật khẩu.  
+- Mức độ: Cao - Ảnh hưởng toàn bộ hệ thống user.  
+
+### Phát hiện chung
+- Truy vấn SQL tại `/login.php` không lọc input `$username`, dễ bị injection.  
+- Ảnh hưởng: Tất cả chức năng đăng nhập dùng DB.  
+
+### Biện pháp khắc phục được đề xuất
+- Sử dụng prepared statement để bind tham số.  
+- Hiệu quả: Ngăn chặn mọi dạng SQLi.  
+
+### Chi tiết kỹ thuật
+- **Vị trí**: `/login.php`.  
+- **Nguyên nhân**: `$username` đưa thẳng vào query `SELECT * FROM users WHERE username = '$username'`.  
+- **Payload**: `' OR 1=1 --`.  
+- **Minh họa**: [Hình 1 - Login thành công với payload](link_ảnh).  
+
+### Hệ thống và phương pháp đã thử nghiệm được sử dụng
+- **Hệ thống**: Windows 10, XAMPP 8.0, PHP 7.4.  
+- **Phương pháp**: Inject thủ công qua form login, dùng Burp Suite capture request.  
+- **Tool**: Burp Suite, Firefox DevTools.  
+
+</details>
+
+<details>
