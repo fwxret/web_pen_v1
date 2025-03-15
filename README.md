@@ -28,7 +28,7 @@ Website được xây dựng theo mô hình **MVC (Model-View-Controller)** và 
 - ✅ Hỗ trợ upload file  
 - ✅ Triển khai trên máy chủ  
 
-## 2. Giao diện Website
+## Giao diện Website
 
 ### 🔹 Giao diện chính
 
