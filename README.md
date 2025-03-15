@@ -28,7 +28,7 @@ Website được xây dựng theo mô hình **MVC (Model-View-Controller)** và 
 - ✅ Hỗ trợ upload file  
 - ✅ Triển khai trên máy chủ  
 
-## Giao diện Website
+# Giao diện Website
 
 ### 🔹 Giao diện chính
 
@@ -57,11 +57,12 @@ Website được xây dựng theo mô hình **MVC (Model-View-Controller)** và 
 
 | STT | Lỗ hổng | Mô tả | Vị trí | Mức độ |
 |---|---|---|---|---|
-| **1** | **A01:2021 - Broken Access Control** | Cho phép xóa user mà không kiểm tra quyền admin. | `/profile/deleteUser` | 🔴 Cao |
-| **2** | **A03:2021 - Injection (SQLi)** | Thực hiện SQL Injection trong truy vấn đăng nhập. | `/login.php` | 🔴 Cao |
-| **3** | **A07:2021 - Identification & Authentication Failures** | Lưu mật khẩu dưới dạng plaintext, không có bảo vệ đăng nhập. | `User.php` (Model) | 🟠 Trung bình |
-| **4** | **A08:2021 - Software and Data Integrity Failures (RCE)** | Cho phép upload file `.php` dẫn đến thực thi mã từ xa (RCE). | `/profile/uploadAvatar` | 🔴 Cao |
-| **5** | **A06:2021 - Vulnerable and Outdated Components (XSS)** | Chấp nhận input mà không lọc, gây **Stored XSS** trong bình luận blog. | `/blog_detail.php` | 🟠 Trung bình |
+| **1** | **A03:2021 - Injection (SQLi)** | Thực hiện SQL Injection trong truy vấn đăng nhập. | `/login.php` | 🔴 Cao |
+| **2** | **A07:2021 - Identification & Authentication Failures** | Cho phép xóa người dùng mà không xác thực quyền admin. | `/profile/updateEmail` | 🔴 Cao |
+| **3** | **A08:2021 - Software and Data Integrity Failures (RCE)** | Cho phép tải lên file `.php` dẫn đến thực thi mã từ xa. | `/profile/uploadAvatar` | 🔴 Cao |
+| **4** | **A06:2021 - Vulnerable and Outdated Components (Stored XSS)** | Chấp nhận input mà không lọc, gây **Stored XSS** trong bình luận blog. | `/blog_detail.php` | 🟠 Trung bình |
+| **5** | **A05:2021 - Security Misconfiguration** | Cho phép truy cập file backup (`git_old`), lộ thông tin nhạy cảm. | `/backup/git_old` | 🟠 Trung bình |
+
 
 ---
 
