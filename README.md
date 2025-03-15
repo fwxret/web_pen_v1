@@ -76,7 +76,7 @@ Website được xây dựng theo mô hình **MVC (Model-View-Controller)** và 
 
 ### Phát hiện chung
 - Truy vấn SQL tại `/login.php` không lọc input `$username`, dễ bị injection.
-  ![image](https://github.com/user-attachments/assets/578043d5-6633-4772-bcdd-5935da7ebf14)
+  
   
 - Ảnh hưởng: Tất cả chức năng đăng nhập dùng DB.  
 
@@ -86,12 +86,12 @@ Website được xây dựng theo mô hình **MVC (Model-View-Controller)** và 
 
 ### Chi tiết kỹ thuật
 - **Vị trí**: `/login.php`.  
-- **Nguyên nhân**: `$username` đưa thẳng vào query `SELECT * FROM users WHERE username = '$username'`.  
-- **Payload**: `' OR 1=1 --`.  
+- **Nguyên nhân**: $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";.  
+- **Payload**: `'#.  
 - **Minh họa**: [Hình 1 - Login thành công với payload](link_ảnh).  
 
 ### Hệ thống và phương pháp đã thử nghiệm được sử dụng
-- **Hệ thống**: Windows 10, XAMPP 8.0, PHP 7.4.  
+- **Hệ thống**: Windows 11, Laragon, PHP 8.3.16.  
 - **Phương pháp**: Inject thủ công qua form login, dùng Burp Suite capture request.  
 - **Tool**: Burp Suite, Firefox DevTools.  
 
