@@ -75,7 +75,9 @@ Website được xây dựng theo mô hình **MVC (Model-View-Controller)** và 
 - Mức độ: Cao - Ảnh hưởng toàn bộ hệ thống user.  
 
 ### Phát hiện chung
-- Truy vấn SQL tại `/login.php` không lọc input `$username`, dễ bị injection.  
+- Truy vấn SQL tại `/login.php` không lọc input `$username`, dễ bị injection.
+  ![image](https://github.com/user-attachments/assets/578043d5-6633-4772-bcdd-5935da7ebf14)
+  
 - Ảnh hưởng: Tất cả chức năng đăng nhập dùng DB.  
 
 ### Biện pháp khắc phục được đề xuất
