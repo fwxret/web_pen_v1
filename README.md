@@ -53,15 +53,15 @@ Website được xây dựng theo mô hình **MVC (Model-View-Controller)** và 
 
 ---
 
-## 3. Thống kê lỗ hổng OWASP Top 10 (2021)  
+## 3. Thống kê lỗ hổng OWASP Top 10 (2021)
 
 | STT | Lỗ hổng | Mô tả | Vị trí | Mức độ |
 |---|---|---|---|---|
-| **1** | **A03:2021 - Injection (SQLi)** | Thực hiện SQL Injection trong truy vấn đăng nhập. | `/login.php` | 🔴 Cao |
-| **2** | **A07:2021 - Identification & Authentication Failures** | Cho phép xóa người dùng mà không xác thực quyền admin. | `/profile/updateEmail` | 🔴 Cao |
-| **3** | **A08:2021 - Software and Data Integrity Failures (RCE)** | Cho phép tải lên file `.php` dẫn đến thực thi mã từ xa. | `/profile/uploadAvatar` | 🔴 Cao |
-| **4** | **A06:2021 - Vulnerable and Outdated Components (Stored XSS)** | Chấp nhận input mà không lọc, gây **Stored XSS** trong bình luận blog. | `/blog_detail.php` | 🟠 Trung bình |
-| **5** | **A05:2021 - Security Misconfiguration** | Cho phép truy cập file backup (`git_old`), lộ thông tin nhạy cảm. | `/backup/git_old` | 🟠 Trung bình |
+| **1** | **A03:2021 - Injection (SQLi)** | SQL Injection trong truy vấn đăng nhập. | `/login.php` | 🔴 Cao |
+| **2** | **A01:2021 - Broken Access Control** | Xóa user không xác thực quyền admin. | `/profile/updateEmail` | 🔴 Cao |
+| **3** | **A08:2021 - Software and Data Integrity Failures (RCE)** | Upload file `.php` gây RCE. | `/profile/uploadAvatar` | 🔴 Cao |
+| **4** | **A03:2021 - Injection (Stored XSS)** | Stored XSS trong bình luận blog do không lọc input. | `/blog_detail.php` | 🟠 Trung bình |
+| **5** | **A05:2021 - Security Misconfiguration** | Truy cập file backup `git_old`, lộ thông tin. | `/backup/git_old` | 🟠 Trung bình |
 
 
 ---
