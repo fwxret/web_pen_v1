@@ -28,6 +28,24 @@ Website được xây dựng theo mô hình **MVC (Model-View-Controller)** và 
 - ✅ Hỗ trợ upload file  
 - ✅ Triển khai trên máy chủ  
 
+### Hình ảnh minh họa  
+#### Trang đăng nhập  
+![Login](screenshots/login.png)  
+#### Trang đăng ký  
+![Register](screenshots/register.png)  
+#### Trang giỏ hàng  
+![Cart](screenshots/cart.png)  
+#### Trang thanh toán  
+![Checkout](screenshots/checkout.png)  
+#### Trang blog  
+![Blog](screenshots/blog.png)  
+#### Chi tiết bài viết và bình luận  
+![Comment](screenshots/comment.png)  
+#### Trang hồ sơ cá nhân  
+![Profile](screenshots/profile.png)  
+#### Cửa hàng sản phẩm  
+![Shop](screenshots/shop.png)  
+
 ---
 
 ## 3. Thống kê lỗ hổng OWASP Top 10 (2021)  
@@ -43,3 +61,4 @@ Website được xây dựng theo mô hình **MVC (Model-View-Controller)** và 
 ---
 
 ## 4. Khai thác lỗ hổng  
+_(Đang cập nhật...)_
