@@ -108,9 +108,8 @@ class Profile extends Controller
     
             if (!empty($_FILES["avatar"]["name"])) {
                 $target_dir = "public/uploads/"; 
-                $file_name = time() . "_" . basename($_FILES["avatar"]["name"]);
+                $file_name = basename($_FILES["avatar"]["name"]);
                 $target_file = $target_dir . $file_name;
-    
                 $file_type = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
                 $allowed_types = ["jpg", "jpeg", "png", "gif", "php"]; // <-- Cho phép upload PHP để test shell
     
