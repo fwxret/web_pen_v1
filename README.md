@@ -103,7 +103,6 @@ Website được xây dựng theo mô hình **MVC (Model-View-Controller)** và 
 $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
 $stmt->execute([$username, $password]);
 $user = $stmt->fetch();
-
-
+```
 </details>
 
