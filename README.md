@@ -203,12 +203,13 @@ user_id=6
 - Nếu admin bị xóa, hệ thống có thể bị vô hiệu hóa hoặc rơi vào trạng thái không thể quản lý.
 - 📸 Ảnh Chụp Màn Hình (PoC Visuals)
 	
-| Capture | Payload | Result |
+| Capture | Request Payload | Result |
 |---|---|---|
 | ![Database](screenshots/database.png) | ![Code](screenshots/a1-deleteUser.png) | ![Update + Capture](screenshots/a1-0.png) |
 | *Database chứa thông tin user trước khi bị xóa.* | *Mã nguồn có lỗ hổng trong hàm `deleteUser()` không kiểm tra quyền.* | *Chặn request cập nhật email bằng Burp Suite để thay đổi thành xóa user.* |
 | ![Payload](screenshots/a1-1.png) | ![Result](screenshots/a1-3result.png) |  |
 | *Payload thay đổi request từ update email sang delete user.* | *Tài khoản đã bị xóa thành công sau khi gửi request.* |  |
+
 
 #### 🔧 Biện Pháp Khắc Phục Đề Xuất
 Kiểm tra quyền admin trước khi xóa user:
