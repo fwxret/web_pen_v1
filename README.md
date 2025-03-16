@@ -134,7 +134,7 @@ $user = $stmt->fetch();
 </details> 
 
 <details>
-  <summary><h3>🛑 A01:2021 - Broken Access Control - Xóa Bất Kỳ User</h2></summary>
+  <summary><h3>🛑 A01:2021 - Broken Access Control - Xóa Bất Kỳ User</h3></summary>
 
 ### 🔥 Tầm Quan Trọng Của Phát Hiện Chính
 - **Mức độ**: 🔴 Cao  
