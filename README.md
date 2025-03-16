@@ -179,7 +179,7 @@ user_id=1
 #### ✅ 5. Gửi request.
 - Nếu lỗ hổng tồn tại, tài khoản có id=1 sẽ bị xóa mà không cần quyền admin.
 - Nếu admin bị xóa, hệ thống có thể bị vô hiệu hóa hoặc rơi vào trạng thái không thể quản lý.
-📸 Ảnh Chụp Màn Hình (PoC Visuals)
+- 📸 Ảnh Chụp Màn Hình (PoC Visuals)
 	
 | Capture | Playload  | Result |
 |---|---|---|
