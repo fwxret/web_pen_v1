@@ -134,7 +134,7 @@ $user = $stmt->fetch();
 </details> 
 
 <details>
-  <summary><h2>🛑 A01:2021 - Broken Access Control - Xóa Bất Kỳ User</h2></summary>
+  <summary><h3>🛑 A01:2021 - Broken Access Control - Xóa Bất Kỳ User</h2></summary>
 
 ### 🔥 Tầm Quan Trọng Của Phát Hiện Chính
 - **Mức độ**: 🔴 Cao  
@@ -167,37 +167,32 @@ Host: target-site.com
 Content-Type: application/x-www-form-urlencoded
 
 email=hacker@evil.com
-📌 4. Chỉnh sửa request:
+```
+#### 📌 4. Chỉnh sửa request:
 Đổi URL /profile/updateEmail thành /profile/deleteUser.
 Thêm tham số user_id với giá trị ID của nạn nhân (ví dụ: 1 là admin).
 Yêu cầu đã chỉnh sửa (Request tấn công - xóa user ID 1):
-
+```
 POST /profile/deleteUser HTTP/1.1
 Host: target-site.com
 Content-Type: application/x-www-form-urlencoded
 
 user_id=1
-✅ 5. Gửi request.
+```
+#### ✅ 5. Gửi request.
 Nếu lỗ hổng tồn tại, tài khoản có id=1 sẽ bị xóa mà không cần quyền admin.
 Nếu admin bị xóa, hệ thống có thể bị vô hiệu hóa hoặc rơi vào trạng thái không thể quản lý.
 📸 Ảnh Chụp Màn Hình (PoC Visuals)
 Trước khi tấn công	Sau khi tấn công
 🔧 Biện Pháp Khắc Phục Đề Xuất
 Kiểm tra quyền admin trước khi xóa user:
-php
-Copy
-Edit
+```
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     $_SESSION['error'] = "Unauthorized access!";
     header("Location: " . URLROOT . "/profile");
     exit();
 }
-Sử dụng CSRF token để tránh giả mạo request.
-Ghi log hoạt động quan trọng để theo dõi thao tác quản trị.
-🚀 Mức độ nghiêm trọng: 🔴 Cao
-Nguy cơ xóa toàn bộ tài khoản, kể cả admin.
-Dễ khai thác, chỉ cần chỉnh sửa request.
-Gây mất dữ liệu nghiêm trọng nếu không có cơ chế khôi phục.
-Khuyến nghị: Fix ngay lập tức bằng cách thêm xác thực quyền admin trước khi thực hiện xóa user. 🚨
-
+```
+- Sử dụng CSRF token để tránh giả mạo request.
+- Ghi log hoạt động quan trọng để theo dõi thao tác quản trị.
 </details> 
