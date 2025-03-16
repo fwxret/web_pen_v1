@@ -68,7 +68,7 @@ Website được xây dựng theo mô hình **MVC (Model-View-Controller)** và 
 
 ## 4. Khai thác lỗ hổng  
 <details>
-  <summary>🛑<h2>A03:2021 - Injection (SQLi) - Bypass Đăng Nhập</h2></summary>
+  <summary>🛑<strong>A03:2021 - Injection (SQLi) - Bypass Đăng Nhập</strong></summary>
 
 ### 🔥 Tầm Quan Trọng Của Phát Hiện Chính
 - **Mức độ**: 🔴 Cao  
@@ -134,7 +134,7 @@ $user = $stmt->fetch();
 </details> 
 
 <details>
-  <summary>🛑<h3> A01:2021 - Broken Access Control - Xóa Bất Kỳ User</h3></summary>
+  <summary>🛑<strong> A01:2021 - Broken Access Control - Xóa Bất Kỳ User</strong></summary>
 
 ### 🔥 Tầm Quan Trọng Của Phát Hiện Chính
 - **Mức độ**: 🔴 Cao  
