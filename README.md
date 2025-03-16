@@ -87,23 +87,22 @@ Website được xây dựng theo mô hình **MVC (Model-View-Controller)** và 
 
 ---
 
+## Hệ thống và phương pháp đã thử nghiệm được sử dụng
+- **Hệ thống**: Windows 11, Laragon, PHP 8.3.16.  
+- **Phương pháp**: Inject thủ công qua form login, dùng Burp Suite capture request.  
+- **Tool**: Burp Suite, Firefox DevTools.  
+
+
 ## 🔧 Biện Pháp Khắc Phục Được Đề Xuất
 - **Sử dụng Prepared Statement (PDO / MySQLi) để bind tham số**.  
 - **Cấm sử dụng truy vấn SQL với chuỗi nối trực tiếp từ input người dùng**.  
 - **Bật chế độ báo lỗi và log lỗi thay vì hiển thị lỗi SQL ra ngoài**.  
 
-Ví dụ sửa lỗi bằng **Prepared Statement (PDO)**:
+ - Sửa lỗi bằng **Prepared Statement (PDO)**:
 ```php
 $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
 $stmt->execute([$username, $password]);
 $user = $stmt->fetch();
-
-
-
-## Hệ thống và phương pháp đã thử nghiệm được sử dụng
-- **Hệ thống**: Windows 11, Laragon, PHP 8.3.16.  
-- **Phương pháp**: Inject thủ công qua form login, dùng Burp Suite capture request.  
-- **Tool**: Burp Suite, Firefox DevTools.  
 
 </details>
 
