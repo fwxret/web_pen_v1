@@ -88,7 +88,7 @@ Website được xây dựng theo mô hình **MVC (Model-View-Controller)** và 
 
 ---
 
-###🛠 PoC - Bằng Chứng Khai Thác
+### 🛠 PoC - Bằng Chứng Khai Thác
 📌 1. Payload Tấn Công:
 --------------------------------
 ```
@@ -121,7 +121,7 @@ Location: /home.php
 |---|---|
 | ![SQL Injection PoC](screenshots/sqlt1.png) | ![Burp Suite PoC](screenshots/sqlit2.png) |
 
-### 🔧 Biện Pháp Khắc Phục Được Đề Xuất
+###  🔧 Biện Pháp Khắc Phục Được Đề Xuất
 Sử dụng Prepared Statement (PDO / MySQLi) để bind tham số:
 ```php
 $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
