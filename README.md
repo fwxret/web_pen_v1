@@ -134,7 +134,7 @@ $user = $stmt->fetch();
 </details> 
 
 <details>
-  <summary><h3>🛑 A01:2021 - Broken Access Control - Xóa Bất Kỳ User</h3></summary>
+  <summary>🛑<h3> A01:2021 - Broken Access Control - Xóa Bất Kỳ User</h3></summary>
 
 ### 🔥 Tầm Quan Trọng Của Phát Hiện Chính
 - **Mức độ**: 🔴 Cao  
@@ -149,12 +149,9 @@ $user = $stmt->fetch();
 ### 📌 Phát Hiện Chung
 - Trang **Profile** có chức năng cập nhật email (`updateEmail()`), nhưng **hàm xóa user (`deleteUser()`) không có kiểm tra quyền**.  
 - Kẻ tấn công có thể **thay đổi request** từ `updateEmail` thành `deleteUser` để xóa bất kỳ tài khoản nào, kể cả admin.  
-
 ---
 
 ### 🛠 PoC - Bằng Chứng Khai Thác  
-
-#### 🚨 **Khai thác thủ công** (Burp Suite)
 
 #### 📌 1. Đăng nhập vào hệ thống với một tài khoản bình thường.  
 #### 📌 2. Chặn request bằng Intercept -> Gửi đến Repeater.  
