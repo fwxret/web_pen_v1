@@ -113,8 +113,8 @@ Location: /home.php
 
 🚨 5. Ảnh Chụp Màn Hình:
 --------------------------------
-![PoC SQL Injection](screenshots/sqli1.png)  
-![Burp Suite PoC](screenshots/sqli#.png)
+![Comment](screenshots/comment.png) 
+![Comment](screenshots/comment.png)
 
 ## 🔧 Biện Pháp Khắc Phục Được Đề Xuất
 Sử dụng Prepared Statement (PDO / MySQLi) để bind tham số:
