@@ -115,7 +115,7 @@ Location: /home.php
 --------------------------------
 | PoC SQL Injection | Burp Suite PoC |
 |---|---|
-| ![SQL Injection PoC](screenshots/sql1.png) | ![Burp Suite PoC](screenshots/sqli#.png) |
+| ![SQL Injection PoC](screenshots/sql1.png) | ![Burp Suite PoC](screenshots/sqli_exploitsqli.png) |
 
 ## 🔧 Biện Pháp Khắc Phục Được Đề Xuất
 Sử dụng Prepared Statement (PDO / MySQLi) để bind tham số:
