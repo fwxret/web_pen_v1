@@ -70,7 +70,7 @@ Website được xây dựng theo mô hình **MVC (Model-View-Controller)** và 
 <details>
   <summary><h2>🛑 A03:2021 - Injection (SQLi) - Bypass Đăng Nhập</h2></summary>
 
-## 🔥 Tầm Quan Trọng Của Phát Hiện Chính
+### 🔥 Tầm Quan Trọng Của Phát Hiện Chính
 - **Mức độ**: 🔴 Cao  
 - **Ảnh hưởng**: Cho phép bypass xác thực password, truy cập tài khoản nếu biết username hợp lệ.  
 - **Hệ lụy**:  
@@ -80,7 +80,7 @@ Website được xây dựng theo mô hình **MVC (Model-View-Controller)** và 
 
 ---
 
-## 📌 Phát Hiện Chung
+### 📌 Phát Hiện Chung
 - Truy vấn SQL tại **`/login.php`** không lọc đầu vào của biến `$username`.  
 - Cho phép thực hiện **SQL Injection** bằng cách chèn ký tự `#` để comment bỏ điều kiện password.  
 - Payload `carlos'#` (với `carlos` là username thật) bỏ qua kiểm tra password, cho phép login mà không cần mật khẩu đúng.  
@@ -88,7 +88,7 @@ Website được xây dựng theo mô hình **MVC (Model-View-Controller)** và 
 
 ---
 
-## 🛠 PoC - Bằng Chứng Khai Thác
+###🛠 PoC - Bằng Chứng Khai Thác
 📌 1. Payload Tấn Công:
 --------------------------------
 ```
@@ -121,7 +121,7 @@ Location: /home.php
 |---|---|
 | ![SQL Injection PoC](screenshots/sqlt1.png) | ![Burp Suite PoC](screenshots/sqlit2.png) |
 
-## 🔧 Biện Pháp Khắc Phục Được Đề Xuất
+### 🔧 Biện Pháp Khắc Phục Được Đề Xuất
 Sử dụng Prepared Statement (PDO / MySQLi) để bind tham số:
 ```php
 $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
