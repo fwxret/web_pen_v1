@@ -68,7 +68,7 @@ Website được xây dựng theo mô hình **MVC (Model-View-Controller)** và 
 
 ## 4. Khai thác lỗ hổng  
 <details>
-# 🛑 A03:2021 - Injection (SQLi) - Bypass Đăng Nhập
+  <summary>🛑 A03:2021 - Injection (SQLi) - Bypass Đăng Nhập</summary>
 
 ## 🔥 Tầm Quan Trọng Của Phát Hiện Chính
 - **Mức độ**: 🔴 Cao  
@@ -99,11 +99,11 @@ $stmt->execute([$username, $password]);
 $user = $stmt->fetch();
 
 
-### Hệ thống và phương pháp đã thử nghiệm được sử dụng
+
+## Hệ thống và phương pháp đã thử nghiệm được sử dụng
 - **Hệ thống**: Windows 11, Laragon, PHP 8.3.16.  
 - **Phương pháp**: Inject thủ công qua form login, dùng Burp Suite capture request.  
 - **Tool**: Burp Suite, Firefox DevTools.  
 
 </details>
 
-<details>
