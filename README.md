@@ -68,27 +68,36 @@ Website được xây dựng theo mô hình **MVC (Model-View-Controller)** và 
 
 ## 4. Khai thác lỗ hổng  
 <details>
-<summary>A03:2021 - Injection (SQLi)</summary>
+# 🛑 A03:2021 - Injection (SQLi) - Bypass Đăng Nhập
 
-### Tầm quan trọng của phát hiện chính
-- Cho phép bypass xác thực, truy cập tài khoản admin không cần mật khẩu.  
-- Mức độ: Cao - Ảnh hưởng toàn bộ hệ thống user.  
+## 🔥 Tầm Quan Trọng Của Phát Hiện Chính
+- **Mức độ**: 🔴 Cao  
+- **Ảnh hưởng**: Cho phép bypass xác thực, truy cập tài khoản admin mà không cần mật khẩu.  
+- **Hệ lụy**:
+  - Tấn công viên có thể đăng nhập vào tài khoản bất kỳ.
+  - Có thể leo thang đặc quyền nếu truy cập vào tài khoản admin.
+  - Khai thác sâu hơn bằng cách dump database nếu UNION-based SQLi hoạt động.  
 
-### Phát hiện chung
-- Truy vấn SQL tại `/login.php` không lọc input `$username`, dễ bị injection.
-  
-  
-- Ảnh hưởng: Tất cả chức năng đăng nhập dùng DB.  
+---
 
-### Biện pháp khắc phục được đề xuất
-- Sử dụng prepared statement để bind tham số.  
-- Hiệu quả: Ngăn chặn mọi dạng SQLi.  
+## 📌 Phát Hiện Chung
+- Truy vấn SQL tại **`/login.php`** không lọc đầu vào của biến `$username`.  
+- Cho phép thực hiện **SQL Injection** bằng cách chèn dữ liệu độc hại.  
+- Có thể bỏ qua xác thực bằng cách sử dụng ký tự `'` hoặc `#` để phá vỡ cú pháp SQL gốc.  
 
-### Chi tiết kỹ thuật
-- **Vị trí**: `/login.php`.  
-- **Nguyên nhân**: $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";.  
-- **Payload**: `'#.  
-- **Minh họa**: [Hình 1 - Login thành công với payload](link_ảnh).  
+---
+
+## 🔧 Biện Pháp Khắc Phục Được Đề Xuất
+- **Sử dụng Prepared Statement (PDO / MySQLi) để bind tham số**.  
+- **Cấm sử dụng truy vấn SQL với chuỗi nối trực tiếp từ input người dùng**.  
+- **Bật chế độ báo lỗi và log lỗi thay vì hiển thị lỗi SQL ra ngoài**.  
+
+Ví dụ sửa lỗi bằng **Prepared Statement (PDO)**:
+```php
+$stmt = $pdo->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
+$stmt->execute([$username, $password]);
+$user = $stmt->fetch();
+
 
 ### Hệ thống và phương pháp đã thử nghiệm được sử dụng
 - **Hệ thống**: Windows 11, Laragon, PHP 8.3.16.  
