@@ -180,7 +180,10 @@ user_id=1
 - Nếu lỗ hổng tồn tại, tài khoản có id=1 sẽ bị xóa mà không cần quyền admin.
 - Nếu admin bị xóa, hệ thống có thể bị vô hiệu hóa hoặc rơi vào trạng thái không thể quản lý.
 📸 Ảnh Chụp Màn Hình (PoC Visuals)
-Trước khi tấn công	Sau khi tấn công
+	
+| Capture | Playload  | Result |
+|---|---|---|
+| ![Login](screenshots/login.png) | ![Register](screenshots/register.png) | ![Shop](screenshots/shop.png) |
 #### 🔧 Biện Pháp Khắc Phục Đề Xuất
 Kiểm tra quyền admin trước khi xóa user:
 ```
