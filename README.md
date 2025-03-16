@@ -68,7 +68,7 @@ Website được xây dựng theo mô hình **MVC (Model-View-Controller)** và 
 
 ## 4. Khai thác lỗ hổng  
 <details>
-  <summary>🛑 <strong><h3>A03:2021 - Injection (SQLi) - Bypass Đăng Nhập</h3></strong></summary>
+  <summary>🛑<h3>A03:2021 - Injection (SQLi) - Bypass Đăng Nhập</h3></summary>
 
 ### 🔥 Tầm Quan Trọng Của Phát Hiện Chính
 - **Mức độ**: 🔴 Cao  
