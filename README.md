@@ -84,13 +84,11 @@ Website được xây dựng theo mô hình **MVC (Model-View-Controller)** và 
 - Truy vấn SQL tại **`/login.php`** không lọc đầu vào của biến `$username`.  
 - Cho phép thực hiện **SQL Injection** bằng cách chèn ký tự `#` để comment bỏ điều kiện password.  
 - Payload `carlos'#` (với `carlos` là username thật) bỏ qua kiểm tra password, cho phép login mà không cần mật khẩu đúng.  
-- Payload `' OR 1=1 --` không hoạt động do xử lý lỗi trong `Database.php`.  
+- Payload `' OR 1=1 --` ` -- ` không hoạt động do xử lý lỗi trong `Database.php`.  
 
 ---
 
 ## 🛠 PoC - Bằng Chứng Khai Thác
-
-```plaintext
 📌 1. Payload Tấn Công:
 --------------------------------
 Username: carlos'#
@@ -117,6 +115,7 @@ Location: /home.php
 --------------------------------
 ![PoC SQL Injection](screenshots/sqli1.png)  
 ![Burp Suite PoC](screenshots/sqli#.png)
+
 ## 🔧 Biện Pháp Khắc Phục Được Đề Xuất
 Sử dụng Prepared Statement (PDO / MySQLi) để bind tham số:
 ```php
