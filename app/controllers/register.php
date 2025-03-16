@@ -31,9 +31,7 @@ class Register extends Controller {
 
                 header("Location: " . URLROOT . "/login");
                 exit();
-            } else {
-                echo "SQL Error: " . $db->con->error; // Debug lỗi SQL
-            }
+            } 
         }
     }
 }
