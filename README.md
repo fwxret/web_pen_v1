@@ -104,7 +104,9 @@ username=carlos'#&password=randompassword
 
 🛠 3. Truy Vấn SQL Bị Thao Túng:
 --------------------------------
+```
 SELECT * FROM users WHERE username = 'carlos'#' AND password = 'randompassword';
+```
 
 ✅ 4. Response Thành Công:
 --------------------------------
@@ -115,7 +117,7 @@ Location: /home.php
 --------------------------------
 | PoC SQL Injection | Burp Suite PoC |
 |---|---|
-| ![SQL Injection PoC](screenshots/sql1.png) | ![Burp Suite PoC](screenshots/sqli_exploitsqli.png) |
+| ![SQL Injection PoC](screenshots/sql1.png) | ![Burp Suite PoC](screenshots/sqlit2.png) |
 
 ## 🔧 Biện Pháp Khắc Phục Được Đề Xuất
 Sử dụng Prepared Statement (PDO / MySQLi) để bind tham số:
