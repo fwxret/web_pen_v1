@@ -122,7 +122,7 @@ Location: /home.php
 | ![SQL PoC](screenshots/sqlt1.png) | ![Burp Suite PoC](screenshots/sqlit2.png) |
 
 ###  🔧 Biện Pháp Khắc Phục Được Đề Xuất
-Sử dụng Prepared Statement (PDO / MySQLi) để bind tham số:
+- Sử dụng Prepared Statement (PDO / MySQLi) để bind tham số:
 ```php
 $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
 $stmt->execute([$username, $password]);
