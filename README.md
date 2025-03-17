@@ -262,7 +262,7 @@ Tạo file **`pls.php`** với nội dung:
 ### 📌 3. Upload file pls.php thông qua chức năng Upload Avatar
   | Test |  Check |
   |---|---|
-  | ![Test](screenshots/testingimg.png) | ![Check](screenshots/checkimg.png) |
+  | ![Test](screenshots/testimg.png) | ![Check](screenshots/checkimg.png) |
 ### 📌 4. Thực thi lệnh từ xa
 Gửi request thực thi lệnh whoami để xác định user chạy webserver:
 ```
@@ -279,7 +279,7 @@ desktop-4kbnl3q\ducson
 -👉 Điều này chứng minh lệnh đã được thực thi trên máy chủ.
 
 ### 🚨 5. Ảnh Chụp Màn Hình (PoC Visuals)
-| Bước | Mô tả | Hình ảnh |
+| Step | Description | Images |
 |------|------------|--------|
 | 1 | Kiểm tra webshell có thể tải lên hay không. | ![Check](screenshots/check-webshell.png) |
 | 2 | Tải lên file webshell `pls.php`. | ![Upload](screenshots/upload-webshell.png) |
