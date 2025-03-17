@@ -225,3 +225,37 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
 - Sử dụng CSRF token để tránh giả mạo request.
 - Ghi log hoạt động quan trọng để theo dõi thao tác quản trị.
 </details> 
+<details>  
+  <summary>🛑<strong> A08:2021 - Software and Data Integrity Failures (RCE) - Upload Webshell</strong></summary>
+
+## 🔥 Tầm Quan Trọng Của Phát Hiện Chính  
+- **Mức độ**: 🔴 Cao  
+- **Ảnh hưởng**: Cho phép thực thi mã từ xa (RCE) trên server.  
+- **Hệ lụy**:  
+  - Kẻ tấn công có thể tải lên và thực thi mã độc.  
+  - Có thể truy cập trái phép vào hệ thống file của server.  
+  - Mở đường cho tấn công leo thang đặc quyền hoặc pivoting sang các hệ thống khác.  
+
+---
+
+## 📌 Phát Hiện Chung  
+- Chức năng **Upload Avatar** tại `/profile` **không kiểm tra kỹ loại file tải lên**.  
+- Ứng dụng **chỉ kiểm tra phần mở rộng (extension)**, nhưng kẻ tấn công có thể bypass bằng cách đổi **header request**.  
+- Nếu file `.php` được upload thành công, kẻ tấn công có thể **thực thi lệnh trên máy chủ từ xa**.  
+
+---
+
+## 🛠 PoC - Bằng Chứng Khai Thác  
+
+### 📌 1. Kiểm tra chức năng upload với file hình ảnh hợp lệ.  
+- Upload một file `.png` để kiểm tra đường dẫn lưu trữ trên server.  
+- Quan sát thấy file được lưu vào thư mục `/web_pen_v1/public/uploads/`.  
+
+---
+
+### 📌 2. Tạo Webshell với payload PHP  
+Tạo file **`pls.php`** với nội dung:  
+
+```php
+<?php echo system($_GET['command']); ?>
+```
