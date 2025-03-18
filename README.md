@@ -376,4 +376,73 @@ $comment = htmlspecialchars($_POST['comment'], ENT_QUOTES, 'UTF-8');
 Content-Security-Policy: default-src 'self'; script-src 'self';
 ```
 </details>
+<details>  
+  <summary>🛑<strong> A05:2021 - Security Misconfiguration - Lộ File Backup</strong></summary>
 
+## 🔥 Tầm Quan Trọng Của Phát Hiện Chính  
+- **Mức độ**: 🟠 Trung bình  
+- **Ảnh hưởng**: Dò được thông tin nhạy cảm của hệ thống.  
+- **Hệ lụy**:  
+  - Lộ thông tin về cấu hình Git.  
+  - Dò ra đường dẫn thư mục nội bộ và các file quan trọng.  
+  - Tạo điều kiện cho các cuộc tấn công tiếp theo như **Privilege Escalation** hoặc **RCE**.  
+
+---
+
+## 📌 Phát Hiện Chung  
+- Khi truy cập thư mục `/backup/`, có thể thấy danh sách file backup của hệ thống.  
+- Không có bất kỳ **cơ chế chặn truy cập** nào, dẫn đến **lộ thông tin quan trọng**.  
+- Các file như `git-config-old.txt`, `git-logs-old.txt`, `git-status-old.txt` chứa dữ liệu nhạy cảm.  
+
+---
+
+## 🛠 PoC - Bằng Chứng Khai Thác  
+
+### 📌 1. Truy cập đường dẫn backup  
+- Mở trình duyệt và truy cập:  
+```
+http://localhost/web_pen_v1/backup/
+```
+
+- Kết quả trả về danh sách file backup:  
+
+📸 **Ảnh minh họa**:  
+
+| Mở thư mục backup | Nội dung file backup |
+|-------------------|---------------------|
+| ![Index Backup](screenshots/index-backup.png) | ![File Content](screenshots/file-backup.png) |
+
+---
+
+### 📌 2. Đọc nội dung file `git-config-old.txt`  
+- Mở file backup và thấy thông tin nhạy cảm:  
+```
+[user]
+    name = carlos
+    email = carlos@admin.com
+[core]
+    repositoryformatversion = 0
+    filemode = true
+    bare = false
+```
+
+- Lộ thông tin admin, cấu trúc repo, và các file quan trọng khác.  
+---
+
+## 🔧 Biện Pháp Khắc Phục Được Đề Xuất  
+
+### ✅ 1. Chặn truy cập thư mục `/backup/` bằng `.htaccess`  
+Tạo file `.htaccess` trong thư mục `backup/` và thêm:  
+```
+Options -Indexes
+Deny from all
+```
+#### ✅ 2. Xóa các file backup không cần thiết
+Kiểm tra và xóa ngay các file backup không sử dụng.
+Không lưu trữ file backup trong thư mục public.
+#### ✅ 3. Cấu hình đúng quyền truy cập
+Đặt quyền truy cập thư mục /backup/ chỉ cho phép admin:
+```
+chmod -R 700 backup/
+```
+</details>
