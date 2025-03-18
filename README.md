@@ -315,3 +315,66 @@ move_uploaded_file($_FILES['avatar']['tmp_name'], "uploads/" . $newFileName);
 Đặt quyền chmod 644 cho file, chmod 755 cho thư mục uploads để tránh thực thi mã độc.
 
 </details>
+<details>  
+  <summary>🛑<strong> A03:2021 - Injection (Stored XSS) - Bình luận Blog</strong></summary>
+
+## 🔥 Tầm Quan Trọng Của Phát Hiện Chính  
+- **Mức độ**: 🟠 Trung bình  
+- **Ảnh hưởng**: Cho phép thực thi mã JavaScript độc hại trên trình duyệt của người dùng.  
+- **Hệ lụy**:  
+  - Đánh cắp cookie hoặc dữ liệu phiên của người dùng.  
+  - Tạo ra các cuộc tấn công giả mạo (phishing).  
+  - Chiếm quyền điều khiển tài khoản nếu kết hợp với các lỗ hổng khác.  
+---
+
+## 📌 Phát Hiện Chung  
+- Tại trang **`blog_detail.php`**, người dùng có thể để lại bình luận dưới mỗi bài viết.  
+- Ứng dụng **không kiểm tra hoặc mã hóa dữ liệu đầu vào**, cho phép chèn mã JavaScript.  
+- Khi bình luận chứa mã độc được hiển thị trên trang, nó **tự động thực thi trên trình duyệt** của các người dùng khác.  
+---
+
+## 🛠 PoC - Bằng Chứng Khai Thác  
+
+### 📌 1. Gửi Payload XSS  
+- Truy cập trang chi tiết bài viết (`blog_detail.php`).  
+- Nhập nội dung bình luận với payload sau:  
+
+```html
+<script>alert("Check")</script>
+
+```
+---
+
+### 📌 2. Kiểm tra kết quả  
+- Truy cập lại trang `blog_detail.php` và quan sát trình duyệt.  
+- Nhận thấy **hộp thoại alert xuất hiện**, chứng tỏ mã JavaScript đã được thực thi.  
+
+📸 **Ảnh minh họa**:  
+
+| Gửi Payload XSS | XSS được kích hoạt |
+|-----------------|-------------------|
+| ![Comment XSS](screenshots/comment-xss.png) | ![Alert XSS](screenshots/alert-xss.png) |
+---
+
+## 🔧 Biện Pháp Khắc Phục Được Đề Xuất  
+
+#### ✅ 1. Lọc & mã hóa đầu vào  
+- Trước khi lưu bình luận vào database, mã hóa ký tự đặc biệt:  
+
+```
+php
+$comment = htmlspecialchars($_POST['comment'], ENT_QUOTES, 'UTF-8');
+
+```
+  
+#### ✅ 2. Xác thực đầu vào  
+- Chỉ cho phép nhập văn bản thuần bằng cách kiểm tra regex hoặc whitelist các ký tự hợp lệ.  
+
+#### ✅ 3. Sử dụng Content Security Policy (CSP)  
+- Cấu hình CSP để chặn việc thực thi mã JavaScript nội tuyến:  
+```
+apache
+Content-Security-Policy: default-src 'self'; script-src 'self';
+```
+</details>
+
