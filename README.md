@@ -373,7 +373,6 @@ $comment = htmlspecialchars($_POST['comment'], ENT_QUOTES, 'UTF-8');
 #### ✅ 3. Sử dụng Content Security Policy (CSP)  
 - Cấu hình CSP để chặn việc thực thi mã JavaScript nội tuyến:  
 ```
-apache
 Content-Security-Policy: default-src 'self'; script-src 'self';
 ```
 </details>
