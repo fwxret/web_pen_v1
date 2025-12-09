@@ -59,7 +59,7 @@ Website được xây dựng theo mô hình **MVC (Model-View-Controller)** và 
 |---|---|---|---|---|
 | **1** | **A03:2021 - Injection (SQL Injection)** | SQL Injection trong truy vấn đăng nhập. | `/login.php` | 🔴 Cao |
 | **2** | **A01:2021 - Broken Access Control (IDOR)** | Xóa user không xác thực quyền admin. | `/profile/updateEmail` | 🔴 Cao |
-| **3** | **A08:2021 - Software and Data Integrity Failures (RCE) - Upload Webshell** | Upload file. | `/profile/updateAvatar` | 🔴 Cao |
+| **3** | **A08:2021 - Software and Data Integrity Failures (RCE) - Upload Webshell** | Upload file qua chức năng Avatar| `/profile/uploadAvatar` | 🔴 Cao |
 | **4** | **A03:2021 - Injection (Stored XSS)** | Stored XSS trong bình luận blog do không lọc input. | `/blog_detail.php` | 🟠 Trung bình |
 | **5** | **A05:2021 - Security Misconfiguration** | Truy cập file backup `git_old`, lộ thông tin. | `/backup/git_old` | 🟠 Trung bình |
 
@@ -447,6 +447,7 @@ Không lưu trữ file backup trong thư mục public.
 chmod -R 700 backup/
 ```
 </details>
+
 
 
 
