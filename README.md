@@ -57,7 +57,6 @@ Website được xây dựng theo mô hình **MVC (Model-View-Controller)** và 
 
 | STT | Lỗ hổng | Mô tả | Vị trí | Mức độ |
 |---|---|---|---|---|
-
 | **1** | **A01:2021 - Broken Access Control (IDOR)** | Xóa user không xác thực quyền admin. | `/profile/updateEmail` | 🔴 Cao |
 | **2** | **A03:2021 - Injection (SQL Injection)** | SQL Injection trong truy vấn đăng nhập. | `/login.php` | 🔴 Cao |
 | **3** | **A03:2021 - Injection (Stored XSS)** | Stored XSS trong bình luận blog do không lọc input. | `/blog_detail.php` | 🟠 Trung bình |
@@ -448,6 +447,7 @@ Không lưu trữ file backup trong thư mục public.
 chmod -R 700 backup/
 ```
 </details>
+
 
 
 
