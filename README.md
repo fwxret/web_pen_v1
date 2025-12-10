@@ -85,7 +85,7 @@ Website được xây dựng theo mô hình **MVC (Model-View-Controller)** và 
 - Truy vấn SQL tại **`/login.php`** không lọc đầu vào của biến `$username`.  
 - Cho phép thực hiện **SQL Injection** bằng cách chèn ký tự `#` để comment bỏ điều kiện password.  
 - Payload `carlos'#` (với `carlos` là username thật) bỏ qua kiểm tra password, cho phép login mà không cần mật khẩu đúng.  
-- Payload `' OR 1=1 --` ` -- ` không hoạt động do xử lý lỗi trong `Database.php`.  
+- Payload `' OR 1=1 --` ` -` hoạt động do xử lý trong `Database.php`.  
 
 ---
 
@@ -447,6 +447,7 @@ Không lưu trữ file backup trong thư mục public.
 chmod -R 700 backup/
 ```
 </details>
+
 
 
 
